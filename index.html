@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Restaurante Aurora | Experiencia Gastronómica</title>
+  <meta name="description" content="Restaurante Aurora. Cocina mediterránea moderna, producto local y reservas online." />
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,80 +12,114 @@
 
   <style>
     :root {
-      --bg: #fdfcf9;
+      --bg: #fdfcf9;            /* Crema muy sutil */
       --card: #ffffff;
-      --primary: #b58d3d;
-      --accent: #1a433e;
+      --primary: #b58d3d;      /* Dorado bronce */
+      --accent: #1a433e;       /* Verde bosque profundo */
       --text: #1a1a1a;
       --muted: #717171;
-      --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; line-height: 1.6; overflow-x: hidden; }
 
-    /* --- INTRO ANIMATION (CAPTA ATENCIÓN) --- */
-    #intro {
-      position: fixed;
-      inset: 0;
-      background: var(--accent);
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary);
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Outfit', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    .intro-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(32px, 5vw, 64px);
-      font-weight: 700;
-      letter-spacing: 4px;
-      overflow: hidden;
-      white-space: nowrap;
-      border-right: 2px solid var(--primary);
-      animation: typing 1.5s steps(15, end), blink .75s step-end infinite, fadeOut 0.5s forwards 2.5s;
-      width: 0;
+    /* --- Animaciones de entrada --- */
+    [data-fade] {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: var(--transition);
     }
 
-    @keyframes typing { from { width: 0 } to { width: 100% } }
-    @keyframes blink { from, to { border-color: transparent } 50% { border-color: var(--primary) } }
-    @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
-    @keyframes slideUp { to { transform: translateY(-100%); } }
-
-    .intro-curtain {
-      position: fixed;
-      inset: 0;
-      background: var(--accent);
-      z-index: 9998;
-      animation: slideUp 0.8s cubic-bezier(0.7, 0, 0.3, 1) forwards 2.8s;
+    [data-fade].visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    /* --- ESTILOS GENERALES --- */
+    /* --- Layout & Navegación --- */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    
     header {
       position: fixed;
       width: 100%;
       top: 0;
       z-index: 100;
       transition: var(--transition);
-      padding: 20px 0;
+      padding: 15px 0;
     }
 
     header.scrolled {
       background: rgba(253, 252, 249, 0.95);
       backdrop-filter: blur(10px);
-      padding: 12px 0;
-      box-shadow: 0 4px 30px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      padding: 10px 0;
     }
 
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
     .nav { display: flex; align-items: center; justify-content: space-between; }
-    .brand { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 26px; }
-    .nav-links a { margin-left: 25px; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: var(--text); text-decoration: none; transition: 0.3s; }
+    
+    .brand { 
+      font-family: 'Playfair Display', serif; 
+      font-weight: 700; 
+      font-size: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-links a {
+      margin-left: 25px;
+      font-weight: 400;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s;
+      color: var(--text);
+      text-decoration: none;
+    }
+
     .nav-links a:hover { color: var(--primary); }
 
-    /* --- HERO --- */
+    /* --- Botones --- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: var(--transition);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 15px rgba(181, 141, 61, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(181, 141, 61, 0.3);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--text);
+      color: var(--text);
+    }
+
+    .btn-outline:hover {
+      background: var(--text);
+      color: white;
+    }
+
+    /* --- Hero Section --- */
     .hero {
       height: 100vh;
       display: flex;
@@ -94,60 +129,154 @@
       position: relative;
       background: #000;
       color: white;
-      overflow: hidden;
     }
 
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
-      opacity: 0.7;
-      transform: scale(1.1);
-      animation: zoomHero 10s ease-out forwards 3s;
+      background: url('https://images.unsplash.com/photo-1541542684-4ea7f16baf4b?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
+      opacity: 0.6;
     }
 
-    @keyframes zoomHero { to { transform: scale(1); } }
+    .hero-content { position: relative; max-width: 800px; padding: 20px; }
 
-    .hero-content { position: relative; z-index: 2; max-width: 800px; opacity: 0; transform: translateY(30px); animation: fadeInUp 1s forwards 3.2s; }
-    @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+    .kicker {
+      display: block;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 13px;
+      margin-bottom: 15px;
+    }
 
-    .kicker { color: var(--primary); text-transform: uppercase; letter-spacing: 5px; font-size: 12px; margin-bottom: 20px; display: block; }
-    h1 { font-family: 'Playfair Display', serif; font-size: clamp(40px, 8vw, 80px); line-height: 1.1; margin-bottom: 30px; }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(45px, 8vw, 85px);
+      line-height: 1.1;
+      margin-bottom: 25px;
+    }
 
-    .btn { padding: 16px 35px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: var(--transition); display: inline-block; }
-    .btn-primary { background: var(--primary); color: white; }
-    .btn-primary:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(181,141,61,0.3); }
+    .hero-cta { display: flex; gap: 15px; justify-content: center; margin-top: 30px; }
 
-    /* --- SECCIONES --- */
+    /* --- Menú / Carta --- */
     section { padding: 120px 0; }
-    [data-reveal] { opacity: 0; transform: translateY(40px); transition: 1s cubic-bezier(0.16, 1, 0.3, 1); }
-    [data-reveal].visible { opacity: 1; transform: translateY(0); }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
 
-    .grid-menu { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 50px; }
-    .card { background: white; padding: 40px; border-radius: 20px; border: 1px solid rgba(0,0,0,0.05); transition: 0.4s; }
-    .card:hover { border-color: var(--primary); transform: translateY(-10px); }
-    .menu-item { display: flex; justify-content: space-between; margin-bottom: 20px; border-bottom: 1px dashed #ddd; padding-bottom: 8px; }
+    .section-title h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+    }
 
-    /* --- WHATSAPP --- */
-    .wa { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; padding: 15px 25px; border-radius: 50px; font-weight: 600; text-decoration: none; z-index: 99; box-shadow: 0 10px 25px rgba(0,0,0,0.1); transition: 0.3s; }
-    .wa:hover { transform: scale(1.05); }
+    .grid-menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+    }
 
+    .card-menu {
+      background: var(--card);
+      padding: 40px;
+      border-radius: 20px;
+      border: 1px solid rgba(0,0,0,0.04);
+      transition: var(--transition);
+    }
+
+    .card-menu:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 25px;
+      border-bottom: 1px dashed #e0e0e0;
+      padding-bottom: 8px;
+    }
+
+    .item-name { font-weight: 500; font-size: 17px; }
+    .item-price { color: var(--primary); font-weight: 600; }
+
+    /* --- Galería --- */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 15px;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 15px;
+      transition: transform 0.7s ease;
+    }
+
+    .gallery-grid div { overflow: hidden; border-radius: 15px; }
+    .gallery-grid img:hover { transform: scale(1.05); }
+
+    .g-large { grid-column: span 7; height: 400px; }
+    .g-small { grid-column: span 5; height: 400px; }
+
+    /* --- Información --- */
+    .info-box {
+      background: var(--accent);
+      color: white;
+      padding: 60px;
+      border-radius: 30px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .info-box h3 { font-family: 'Playfair Display', serif; font-size: 32px; margin-bottom: 15px; }
+    .info-box p { opacity: 0.8; }
+
+    /* --- WhatsApp Floating --- */
+    .wa-float {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #25D366;
+      color: white;
+      padding: 15px 25px;
+      border-radius: 50px;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+      z-index: 1000;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: var(--transition);
+    }
+
+    .wa-float:hover { transform: scale(1.05); }
+
+    /* --- Responsive --- */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .info-box { grid-template-columns: 1fr; padding: 30px; }
+      .g-large, .g-small { grid-column: span 12; height: 300px; }
+      h1 { font-size: 45px; }
+    }
   </style>
 </head>
 <body>
 
-  <div id="intro">
-    <div class="intro-title">RESTAURANTE AURORA</div>
-  </div>
-  <div class="intro-curtain"></div>
-
-  <header id="header">
+  <header id="main-header">
     <div class="container nav">
       <div class="brand">AURORA</div>
       <nav class="nav-links">
-        <a href="#menu">La Carta</a>
-        <a href="#galeria">Ambiente</a>
-        <a href="#contacto">Contacto</a>
+        <a href="#menu">Carta</a>
+        <a href="#galeria">Galería</a>
+        <a href="#info">Contacto</a>
+        <a href="#reservas" class="btn btn-outline" style="margin-left:20px; padding: 8px 20px;">Reservar</a>
       </nav>
     </div>
   </header>
@@ -156,57 +285,109 @@
     <section class="hero">
       <div class="hero-bg"></div>
       <div class="hero-content">
-        <span class="kicker">Sabor en cada detalle</span>
-        <h1>Donde la tradición encuentra la vanguardia</h1>
-        <a href="#menu" class="btn btn-primary">Descubrir Menú</a>
+        <span class="kicker">Alta Cocina de Proximidad</span>
+        <h1>El arte de comer sin prisas</h1>
+        <div class="hero-cta">
+          <a href="#reservas" class="btn btn-primary">Reservar Mesa</a>
+          <a href="#menu" class="btn btn-outline" style="border-color:white; color:white;">Explorar Carta</a>
+        </div>
       </div>
     </section>
 
-    <section id="menu" class="container" data-reveal>
-      <div style="text-align: center; margin-bottom: 50px;">
-        <h2 style="font-family:'Playfair Display'; font-size: 40px;">Nuestras Especialidades</h2>
+    <section id="menu">
+      <div class="container">
+        <div class="section-title">
+          <h2>Nuestra Selección</h2>
+          <p>Producto estacional y técnica contemporánea</p>
+        </div>
+        <div class="grid-menu">
+          <div class="card-menu">
+            <h3 style="margin-bottom:30px; font-family:'Playfair Display'">Entrantes</h3>
+            <div class="menu-item"><span class="item-name">Burrata con higos y miel</span><span class="item-price">14€</span></div>
+            <div class="menu-item"><span class="item-name">Tartar de atún rojo</span><span class="item-price">19€</span></div>
+            <div class="menu-item"><span class="item-name">Croquetas de jamón ibérico</span><span class="item-price">12€</span></div>
+          </div>
+          <div class="card-menu">
+            <h3 style="margin-bottom:30px; font-family:'Playfair Display'">Principales</h3>
+            <div class="menu-item"><span class="item-name">Arroz de montaña</span><span class="item-price">22€</span></div>
+            <div class="menu-item"><span class="item-name">Rodaballo salvaje</span><span class="item-price">26€</span></div>
+            <div class="menu-item"><span class="item-name">Entrecot madurado</span><span class="item-price">28€</span></div>
+          </div>
+        </div>
       </div>
-      <div class="grid-menu">
-        <div class="card">
-          <h3 style="margin-bottom:20px; color:var(--primary)">Entrantes</h3>
-          <div class="menu-item"><span>Carpaccio de Pulpo</span> <span>16€</span></div>
-          <div class="menu-item"><span>Flores de Alcachofa</span> <span>14€</span></div>
-          <div class="menu-item"><span>Jamón de Bellota</span> <span>24€</span></div>
+    </section>
+
+    <section id="galeria">
+      <div class="container">
+        <div class="gallery-grid">
+          <div class="g-large"><img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=1600" alt="Interior"></div>
+          <div class="g-small"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1600" alt="Plato"></div>
+          <div class="g-small"><img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=1600" alt="Mesa"></div>
+          <div class="g-large"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1600" alt="Detalle"></div>
         </div>
-        <div class="card">
-          <h3 style="margin-bottom:20px; color:var(--primary)">Principales</h3>
-          <div class="menu-item"><span>Lomo de Bacalao</span> <span>22€</span></div>
-          <div class="menu-item"><span>Arroz de Pato</span> <span>21€</span></div>
-          <div class="menu-item"><span>Solomillo al Whisky</span> <span>26€</span></div>
+      </div>
+    </section>
+
+    <section id="info" style="padding-top: 0;">
+      <div class="container">
+        <div class="info-box">
+          <div>
+            <h3>Visítanos</h3>
+            <p>Calle del Sol, 21. Madrid Central</p>
+            <p style="margin-top:20px;">Martes a Sábado<br>13:30 – 16:30 | 20:00 – 23:30</p>
+          </div>
+          <div style="display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
+            <p style="margin-bottom:20px;">¿Dudas sobre alérgenos o grupos grandes?</p>
+            <a href="https://wa.me/34600000000" class="btn btn-primary" style="background:white; color:var(--accent);">Escribir por WhatsApp</a>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <section id="reservas" style="text-align:center; background:#f0ede7;">
+      <div class="container">
+        <h2 style="font-family:'Playfair Display'; font-size:48px; margin-bottom:20px;">Asegura tu mesa</h2>
+        <p style="margin-bottom:40px; color:var(--muted);">Recomendamos reservar con al menos 48h de antelación para fines de semana.</p>
+        <a href="tel:+34600000000" class="btn btn-primary" style="padding: 20px 50px; font-size: 18px;">Llamar ahora</a>
       </div>
     </section>
   </main>
 
-  <a href="#" class="wa">Reservar Mesa</a>
+  <footer style="padding: 50px 0; text-align: center; border-top: 1px solid #eee;">
+    <div class="container">
+      <p>© 2026 Restaurante Aurora. Diseñado con pasión.</p>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/34600000000" class="wa-float" target="_blank">
+    <span>Reservar por WhatsApp</span>
+  </a>
 
   <script>
-    // Manejo de scroll para el header
+    // 1. Cambio de estilo del Header al hacer Scroll
     window.addEventListener('scroll', () => {
-      const header = document.getElementById('header');
-      if (window.scrollY > 100) header.classList.add('scrolled');
-      else header.classList.remove('scrolled');
+      const header = document.getElementById('main-header');
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
     });
 
-    // Observador para revelar elementos al hacer scroll
+    // 2. Animaciones de aparición (Scroll Reveal)
+    const observerOptions = { threshold: 0.15 };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
       });
-    }, { threshold: 0.2 });
+    }, observerOptions);
 
-    document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
-    
-    // Bloquear scroll durante la intro
-    document.body.style.overflow = 'hidden';
-    setTimeout(() => {
-      document.body.style.overflow = 'auto';
-    }, 3500);
+    document.querySelectorAll('section, .card-menu, .gallery-grid div').forEach(el => {
+      el.setAttribute('data-fade', '');
+      observer.observe(el);
+    });
   </script>
 
 </body>
