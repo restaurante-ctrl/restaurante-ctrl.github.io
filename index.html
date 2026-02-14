@@ -10,385 +10,390 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --bg: #fdfcf9;            /* Crema muy sutil */
-      --card: #ffffff;
-      --primary: #b58d3d;      /* Dorado bronce */
-      --accent: #1a433e;       /* Verde bosque profundo */
-      --text: #1a1a1a;
-      --muted: #717171;
-      --transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
+<style>
+:root {
+  --bg: #fdfcf9;
+  --card: #ffffff;
+  --primary: #b58d3d;
+  --accent: #1a433e;
+  --text: #1a1a1a;
+  --muted: #717171;
+  --transition: all 0.5s cubic-bezier(0.16,1,0.3,1);
+}
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    
-    html { scroll-behavior: smooth; }
+* { box-sizing:border-box;margin:0;padding:0; }
+html { scroll-behavior:smooth; }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Outfit', sans-serif;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+body {
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Outfit',sans-serif;
+  line-height:1.6;
+  overflow-x:hidden;
+}
 
-    /* --- Animaciones de entrada --- */
-    [data-fade] {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: var(--transition);
-    }
+/* Animaciones */
 
-    [data-fade].visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+[data-fade]{
+  opacity:0;
+  transform:translateY(30px);
+  transition:var(--transition);
+}
 
-    /* --- Layout & Navegación --- */
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-    
-    header {
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 100;
-      transition: var(--transition);
-      padding: 15px 0;
-    }
+[data-fade].visible{
+  opacity:1;
+  transform:translateY(0);
+}
 
-    header.scrolled {
-      background: rgba(253, 252, 249, 0.95);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-      padding: 10px 0;
-    }
+/* Layout */
 
-    .nav { display: flex; align-items: center; justify-content: space-between; }
-    
-    .brand { 
-      font-family: 'Playfair Display', serif; 
-      font-weight: 700; 
-      font-size: 24px;
-      letter-spacing: -0.5px;
-    }
+.container{max-width:1100px;margin:0 auto;padding:0 24px;}
 
-    .nav-links a {
-      margin-left: 25px;
-      font-weight: 400;
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: color 0.3s;
-      color: var(--text);
-      text-decoration: none;
-    }
+header{
+  position:fixed;
+  width:100%;
+  top:0;
+  z-index:100;
+  transition:var(--transition);
+  padding:15px 0;
+  background:rgba(253,252,249,0.98); 
+  backdrop-filter:blur(10px);
+  box-shadow:0 4px 20px rgba(0,0,0,0.05);
+}
 
-    .nav-links a:hover { color: var(--primary); }
+header.scrolled{
+  background:rgba(253,252,249,0.95);
+  backdrop-filter:blur(10px);
+  box-shadow:0 4px 20px rgba(0,0,0,0.05);
+  padding:10px 0;
+}
 
-    /* --- Botones --- */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      padding: 14px 28px;
-      border-radius: 50px;
-      font-weight: 600;
-      transition: var(--transition);
-      text-decoration: none;
-      cursor: pointer;
-    }
+.nav{display:flex;align-items:center;justify-content:space-between;}
 
-    .btn-primary {
-      background: var(--primary);
-      color: white;
-      box-shadow: 0 4px 15px rgba(181, 141, 61, 0.2);
-    }
+.brand{
+  font-family:'Playfair Display',serif;
+  font-weight:700;
+  font-size:24px;
+}
 
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(181, 141, 61, 0.3);
-    }
+.nav-links a{
+  margin-left:25px;
+  font-size:14px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  text-decoration:none;
+  color:var(--text);
+}
 
-    .btn-outline {
-      border: 1px solid var(--text);
-      color: var(--text);
-    }
+.nav-links a:hover{color:var(--primary);}
 
-    .btn-outline:hover {
-      background: var(--text);
-      color: white;
-    }
+/* Botones */
 
-    /* --- Hero Section --- */
-    .hero {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      background: #000;
-      color: white;
-    }
+.btn{
+  display:inline-flex;
+  align-items:center;
+  padding:14px 28px;
+  border-radius:50px;
+  font-weight:600;
+  transition:var(--transition);
+  text-decoration:none;
+  cursor:pointer;
+}
 
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: url('https://images.unsplash.com/photo-1541542684-4ea7f16baf4b?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
-      opacity: 0.6;
-    }
+.btn-primary{background:var(--primary);color:white;}
 
-    .hero-content { position: relative; max-width: 800px; padding: 20px; }
+.btn-outline{
+  border:1px solid white;
+  color:white;
+}
 
-    .kicker {
-      display: block;
-      color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 4px;
-      font-size: 13px;
-      margin-bottom: 15px;
-    }
+/* HERO MEJORADO */
 
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(45px, 8vw, 85px);
-      line-height: 1.1;
-      margin-bottom: 25px;
-    }
+.hero{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  position:relative;
+  color:white;
+}
 
-    .hero-cta { display: flex; gap: 15px; justify-content: center; margin-top: 30px; }
+.hero-bg{
+  position:absolute;
+  inset:0;
+  background:url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
+  animation:heroZoom 20s ease-in-out infinite alternate;
+}
 
-    /* --- Menú / Carta --- */
-    section { padding: 120px 0; }
-    
-    .section-title {
-      text-align: center;
-      margin-bottom: 60px;
-    }
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom,rgba(0,0,0,0.4),rgba(0,0,0,0.75));
+}
 
-    .section-title h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 42px;
-    }
+@keyframes heroZoom{
+  from{transform:scale(1);}
+  to{transform:scale(1.1);}
+}
 
-    .grid-menu {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 40px;
-    }
+.hero-content{position:relative;max-width:800px;padding:20px;}
 
-    .card-menu {
-      background: var(--card);
-      padding: 40px;
-      border-radius: 20px;
-      border: 1px solid rgba(0,0,0,0.04);
-      transition: var(--transition);
-    }
+.kicker{
+  color:var(--primary);
+  text-transform:uppercase;
+  letter-spacing:4px;
+  font-size:13px;
+}
 
-    .card-menu:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-    }
+h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(45px,8vw,85px);
+  margin:20px 0;
+}
 
-    .menu-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 25px;
-      border-bottom: 1px dashed #e0e0e0;
-      padding-bottom: 8px;
-    }
+.hero-cta{
+  display:flex;
+  gap:15px;
+  justify-content:center;
+  margin-top:30px;
+}
 
-    .item-name { font-weight: 500; font-size: 17px; }
-    .item-price { color: var(--primary); font-weight: 600; }
+/* Secciones */
 
-    /* --- Galería --- */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 15px;
-    }
+section{padding:120px 0;}
 
-    .gallery-grid img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 15px;
-      transition: transform 0.7s ease;
-    }
+.section-title{text-align:center;margin-bottom:60px;}
 
-    .gallery-grid div { overflow: hidden; border-radius: 15px; }
-    .gallery-grid img:hover { transform: scale(1.05); }
+.section-title h2{
+  font-family:'Playfair Display',serif;
+  font-size:42px;
+}
 
-    .g-large { grid-column: span 7; height: 400px; }
-    .g-small { grid-column: span 5; height: 400px; }
+/* Carta */
 
-    /* --- Información --- */
-    .info-box {
-      background: var(--accent);
-      color: white;
-      padding: 60px;
-      border-radius: 30px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-    }
+.grid-menu{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:40px;
+}
 
-    .info-box h3 { font-family: 'Playfair Display', serif; font-size: 32px; margin-bottom: 15px; }
-    .info-box p { opacity: 0.8; }
+.card-menu{
+  background:var(--card);
+  padding:40px;
+  border-radius:20px;
+  transition:var(--transition);
+}
 
-    /* --- WhatsApp Floating --- */
-    .wa-float {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: #25D366;
-      color: white;
-      padding: 15px 25px;
-      border-radius: 50px;
-      font-weight: 600;
-      box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
-      z-index: 1000;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: var(--transition);
-    }
+.card-menu:hover{transform:translateY(-10px);}
 
-    .wa-float:hover { transform: scale(1.05); }
+.menu-item{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:20px;
+  border-bottom:1px dashed #e0e0e0;
+  padding-bottom:6px;
+}
 
-    /* --- Responsive --- */
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .info-box { grid-template-columns: 1fr; padding: 30px; }
-      .g-large, .g-small { grid-column: span 12; height: 300px; }
-      h1 { font-size: 45px; }
-    }
-  </style>
+.item-price{color:var(--primary);}
+
+/* Galería */
+
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(12,1fr);
+  gap:15px;
+}
+
+.gallery-grid div{overflow:hidden;border-radius:15px;}
+
+.gallery-grid img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform 0.7s ease;
+}
+
+.gallery-grid img:hover{transform:scale(1.05);}
+
+.g-large{grid-column:span 7;height:400px;}
+.g-small{grid-column:span 5;height:400px;}
+
+/* Info */
+
+.info-box{
+  background:var(--accent);
+  color:white;
+  padding:60px;
+  border-radius:30px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+}
+
+.info-box h3{
+  font-family:'Playfair Display',serif;
+  font-size:32px;
+}
+
+/* WhatsApp */
+
+.wa-float{
+  position:fixed;
+  bottom:30px;
+  right:30px;
+  background:#25D366;
+  color:white;
+  padding:15px 25px;
+  border-radius:50px;
+  font-weight:600;
+  text-decoration:none;
+}
+
+/* Responsive */
+
+@media (max-width:768px){
+  .nav-links{display:none;}
+  .info-box{grid-template-columns:1fr;padding:30px;}
+  .g-large,.g-small{grid-column:span 12;height:300px;}
+}
+</style>
 </head>
+
 <body>
 
-  <header id="main-header">
-    <div class="container nav">
-      <div class="brand">AURORA</div>
-      <nav class="nav-links">
-        <a href="#menu">Carta</a>
-        <a href="#galeria">Galería</a>
-        <a href="#info">Contacto</a>
-        <a href="#reservas" class="btn btn-outline" style="margin-left:20px; padding: 8px 20px;">Reservar</a>
-      </nav>
-    </div>
-  </header>
+<header id="main-header">
+<div class="container nav">
+<div class="brand">AURORA</div>
+<nav class="nav-links">
+<a href="#menu">Carta</a>
+<a href="#galeria">Galería</a>
+<a href="#info">Contacto</a>
+<a href="#reservas" class="btn btn-outline" style="margin-left:20px;padding:8px 20px;">Reservar</a>
+</nav>
+</div>
+</header>
 
-  <main>
-    <section class="hero">
-      <div class="hero-bg"></div>
-      <div class="hero-content">
-        <span class="kicker">Alta Cocina de Proximidad</span>
-        <h1>El arte de comer sin prisas</h1>
-        <div class="hero-cta">
-          <a href="#reservas" class="btn btn-primary">Reservar Mesa</a>
-          <a href="#menu" class="btn btn-outline" style="border-color:white; color:white;">Explorar Carta</a>
-        </div>
-      </div>
-    </section>
+<main>
 
-    <section id="menu">
-      <div class="container">
-        <div class="section-title">
-          <h2>Nuestra Selección</h2>
-          <p>Producto estacional y técnica contemporánea</p>
-        </div>
-        <div class="grid-menu">
-          <div class="card-menu">
-            <h3 style="margin-bottom:30px; font-family:'Playfair Display'">Entrantes</h3>
-            <div class="menu-item"><span class="item-name">Burrata con higos y miel</span><span class="item-price">14€</span></div>
-            <div class="menu-item"><span class="item-name">Tartar de atún rojo</span><span class="item-price">19€</span></div>
-            <div class="menu-item"><span class="item-name">Croquetas de jamón ibérico</span><span class="item-price">12€</span></div>
-          </div>
-          <div class="card-menu">
-            <h3 style="margin-bottom:30px; font-family:'Playfair Display'">Principales</h3>
-            <div class="menu-item"><span class="item-name">Arroz de montaña</span><span class="item-price">22€</span></div>
-            <div class="menu-item"><span class="item-name">Rodaballo salvaje</span><span class="item-price">26€</span></div>
-            <div class="menu-item"><span class="item-name">Entrecot madurado</span><span class="item-price">28€</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
+<section class="hero">
+<div class="hero-bg"></div>
+<div class="hero-overlay"></div>
 
-    <section id="galeria">
-      <div class="container">
-        <div class="gallery-grid">
-          <div class="g-large"><img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=1600" alt="Interior"></div>
-          <div class="g-small"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1600" alt="Plato"></div>
-          <div class="g-small"><img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=1600" alt="Mesa"></div>
-          <div class="g-large"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1600" alt="Detalle"></div>
-        </div>
-      </div>
-    </section>
+<div class="hero-content">
+<span class="kicker">Alta Cocina de Proximidad</span>
+<h1>El arte de comer sin prisas</h1>
 
-    <section id="info" style="padding-top: 0;">
-      <div class="container">
-        <div class="info-box">
-          <div>
-            <h3>Visítanos</h3>
-            <p>Calle del Sol, 21. Madrid Central</p>
-            <p style="margin-top:20px;">Martes a Sábado<br>13:30 – 16:30 | 20:00 – 23:30</p>
-          </div>
-          <div style="display:flex; flex-direction:column; justify-content:center; align-items:flex-start;">
-            <p style="margin-bottom:20px;">¿Dudas sobre alérgenos o grupos grandes?</p>
-            <a href="https://wa.me/34600000000" class="btn btn-primary" style="background:white; color:var(--accent);">Escribir por WhatsApp</a>
-          </div>
-        </div>
-      </div>
-    </section>
+<div class="hero-cta">
+<a href="#reservas" class="btn btn-primary">Reservar Mesa</a>
+<a href="#menu" class="btn btn-outline">Explorar Carta</a>
+</div>
+</div>
+</section>
 
-    <section id="reservas" style="text-align:center; background:#f0ede7;">
-      <div class="container">
-        <h2 style="font-family:'Playfair Display'; font-size:48px; margin-bottom:20px;">Asegura tu mesa</h2>
-        <p style="margin-bottom:40px; color:var(--muted);">Recomendamos reservar con al menos 48h de antelación para fines de semana.</p>
-        <a href="tel:+34600000000" class="btn btn-primary" style="padding: 20px 50px; font-size: 18px;">Llamar ahora</a>
-      </div>
-    </section>
-  </main>
+<section id="menu">
+<div class="container">
+<div class="section-title">
+<h2>Nuestra Selección</h2>
+<p>Producto estacional y técnica contemporánea</p>
+</div>
 
-  <footer style="padding: 50px 0; text-align: center; border-top: 1px solid #eee;">
-    <div class="container">
-      <p>© 2026 Restaurante Aurora. Diseñado con pasión.</p>
-    </div>
-  </footer>
+<div class="grid-menu">
 
-  <a href="https://wa.me/34600000000" class="wa-float" target="_blank">
-    <span>Reservar por WhatsApp</span>
-  </a>
+<div class="card-menu">
+<h3>Entrantes</h3>
+<div class="menu-item"><span>Burrata con higos y miel</span><span class="item-price">14€</span></div>
+<div class="menu-item"><span>Tartar de atún rojo</span><span class="item-price">19€</span></div>
+<div class="menu-item"><span>Croquetas de jamón ibérico</span><span class="item-price">12€</span></div>
+</div>
 
-  <script>
-    // 1. Cambio de estilo del Header al hacer Scroll
-    window.addEventListener('scroll', () => {
-      const header = document.getElementById('main-header');
-      if (window.scrollY > 100) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    });
+<div class="card-menu">
+<h3>Principales</h3>
+<div class="menu-item"><span>Arroz de montaña</span><span class="item-price">22€</span></div>
+<div class="menu-item"><span>Rodaballo salvaje</span><span class="item-price">26€</span></div>
+<div class="menu-item"><span>Entrecot madurado</span><span class="item-price">28€</span></div>
+</div>
 
-    // 2. Animaciones de aparición (Scroll Reveal)
-    const observerOptions = { threshold: 0.15 };
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, observerOptions);
+</div>
+</div>
+</section>
 
-    document.querySelectorAll('section, .card-menu, .gallery-grid div').forEach(el => {
-      el.setAttribute('data-fade', '');
-      observer.observe(el);
-    });
-  </script>
+<section id="galeria">
+<div class="container">
+<div class="gallery-grid">
+
+<div class="g-large"><img loading="lazy" src="https://images.unsplash.com/photo-1552566626-52f8b828add9?q=80&w=1600"></div>
+<div class="g-small"><img loading="lazy" src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1600"></div>
+<div class="g-small"><img loading="lazy" src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=1600"></div>
+<div class="g-large"><img loading="lazy" src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1600"></div>
+
+</div>
+</div>
+</section>
+
+<section id="info" style="padding-top:0;">
+<div class="container">
+<div class="info-box">
+
+<div>
+<h3>Visítanos</h3>
+<p>Calle del Sol, 21. Madrid Central</p>
+<p style="margin-top:20px;">Martes a Sábado<br>13:30 – 16:30 | 20:00 – 23:30</p>
+</div>
+
+<div>
+<p style="margin-bottom:20px;">¿Dudas sobre alérgenos o grupos grandes?</p>
+<a href="https://wa.me/34600000000" class="btn btn-primary" style="background:white;color:var(--accent);">
+Escribir por WhatsApp
+</a>
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="reservas" style="text-align:center;background:#f0ede7;">
+<div class="container">
+<h2 style="font-family:'Playfair Display';font-size:48px;margin-bottom:20px;">
+Asegura tu mesa
+</h2>
+<p style="margin-bottom:40px;color:var(--muted);">
+Recomendamos reservar con al menos 48h de antelación para fines de semana.
+</p>
+<a href="tel:+34600000000" class="btn btn-primary" style="padding:20px 50px;font-size:18px;">
+Llamar ahora
+</a>
+</div>
+</section>
+
+</main>
+
+<footer style="padding:50px 0;text-align:center;border-top:1px solid #eee;">
+<div class="container">
+<p>© 2026 Restaurante Aurora. Diseñado con pasión.</p>
+</div>
+</footer>
+
+<a href="https://wa.me/34600000000" class="wa-float">Reservar por WhatsApp</a>
+
+<script>
+window.addEventListener('scroll',()=>{
+const header=document.getElementById('main-header');
+header.classList.toggle('scrolled',window.scrollY>100);
+});
+
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting)entry.target.classList.add('visible');
+});
+},{threshold:0.15});
+
+document.querySelectorAll('section,.card-menu,.gallery-grid div')
+.forEach(el=>{
+el.setAttribute('data-fade','');
+observer.observe(el);
+});
+</script>
 
 </body>
 </html>
